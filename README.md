@@ -1,3 +1,5 @@
+# Rundeck
+
 This is a Docker image of Rundeck (http://rundeck.org)
 based on `debian:latest`
 
@@ -8,7 +10,7 @@ docker run -d --name=rundeck -p 4440:4440 jacekkow/rundeck
 ```
 
 Rundeck should be available at http://127.0.0.1:4440/
-(user/password pairs: user/user and admin/admin)
+(user/password pairs: `user`/`user` and `admin`/`admin`)
 
 By default it uses H2 database and Docker data volumes
 for storage persistence.
@@ -61,7 +63,7 @@ docker run -d --name=rundeck -p 4440:4440 \
 ```
 
 Then set the following options in
-/srv/rundeck/etc/rundeck-config.properties
+`/srv/rundeck/etc/rundeck-config.properties`
 
 ```
 dataSource.url = jdbc:mysql://rundeck-db/rundeck?autoReconnect=true
@@ -78,4 +80,4 @@ docker restart rundeck
 ## Configuration
 
 You can change Java system properties and JVM options by modifying
-`RDECK_JVM` property in /etc/rundeck/profile (which is persisted).
+`RDECK_JVM` property in `/etc/rundeck/profile` (which is persisted).

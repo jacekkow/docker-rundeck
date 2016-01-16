@@ -22,6 +22,5 @@ CMD /run.sh
 
 VOLUME /etc/rundeck
 VOLUME /var/lib/rundeck/data
-VOLUME /var/lib/rundeck/var
 VOLUME /var/lib/rundeck/logs
 VOLUME /var/rundeck

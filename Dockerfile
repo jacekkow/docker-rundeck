@@ -4,9 +4,9 @@ ENV DEBIAN_FRONTEND noninteractive
 
 EXPOSE 4440
 
-ADD bintray-gpg.key rundeck-gpg.key /root/
+ADD *-gpg.key /root/
 RUN echo "deb http://dl.bintray.com/rundeck/rundeck-deb /" > /etc/apt/sources.list.d/rundeck.list \
-	&& apt-key add /root/bintray-gpg.key /root/rundeck-gpg.key
+	&& cat /root/*-gpg.key | apt-key add -
 
 RUN apt-get -y update \
 	&& apt-get -y upgrade \

@@ -12,9 +12,11 @@ chmod g+s,o+x /var/lib/rundeck/logs
 
 . /etc/rundeck/profile
 
-DAEMON="java"
-DAEMON_ARGS="${RDECK_JVM} -cp ${BOOTSTRAP_CP} com.dtolabs.rundeck.RunServer /var/lib/rundeck 4440"
-
-rundeckd="$DAEMON $DAEMON_ARGS"
+# Rundeck 2.6 to 2.7 migration - new profile file
+if [ -z "$rundeckd" ]; then
+	mv -f /etc/rundeck/profile /etc/rundeck/profile.pre-migration
+	cp -f /etc/rundeck-org/profile /etc/rundeck/profile
+	. /etc/rundeck/profile
+fi
 
 su rundeck -s /bin/bash -c "$rundeckd"

@@ -8,9 +8,12 @@ ADD *-gpg.key /root/
 RUN echo "deb http://dl.bintray.com/rundeck/rundeck-deb /" > /etc/apt/sources.list.d/rundeck.list \
 	&& cat /root/*-gpg.key | apt-key add -
 
-RUN apt-get -y update \
+RUN echo 'deb http://httpredir.debian.org/debian jessie-backports main' > \
+		/etc/apt/sources.list.d/jessie-backports.list \
+	&& apt-get -y update \
 	&& apt-get -y upgrade \
-	&& apt-get -y install openssh-client default-jre-headless wget rundeck \
+	&& apt-get -y -t jessie-backports install \
+		openssh-client openjdk-8-jre-headless wget rundeck \
 	&& apt-get -y clean
 
 RUN mkdir /etc/rundeck-org \

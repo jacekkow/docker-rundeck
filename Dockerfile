@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-slim
+FROM openjdk:8-jre-slim-stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV RDECK_JVM_SETTINGS "-Xmx1024m -Xms256m -XX:MaxMetaspaceSize=256m -server"
@@ -14,6 +14,15 @@ RUN apt-get -y update \
 	&& cat /root/*-gpg.key | apt-key add - \
 	&& apt-get -y update \
 	&& apt-get -y install rundeck \
+	&& apt-get -y clean \
+	&& rm -Rf /var/lib/apt/lists/*
+
+RUN echo "deb http://ftp.debian.org/debian stretch-backports main" \
+		> /etc/apt/sources.list.d/backports.list \
+	&& apt-get -y update \
+	&& apt-get -y upgrade \
+	&& apt-get -y -t stretch-backports install \
+		ansible git python-netaddr python3-netaddr \
 	&& apt-get -y clean \
 	&& rm -Rf /var/lib/apt/lists/*
 

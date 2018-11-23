@@ -3,6 +3,12 @@
 This is a Docker image of Rundeck (http://rundeck.org)
 based on `debian:latest`
 
+## Upgrading
+
+Since version 3.0 /etc/rundeck/profile will be overriden!
+To customize JVM options use environment variable:
+`RDECK_JVM_SETTINGS`. See section "Configuration" below.
+
 ## Usage
 
 ```bash
@@ -29,7 +35,7 @@ docker rm -v rundeck-old
 
 ### Local volumes
 
-You use local storage instead of data volumes:
+You can use local storage instead of data volumes:
 
 ```bash
 docker run -d --name=rundeck -p 4440:4440 \
@@ -80,4 +86,21 @@ docker restart rundeck
 ## Configuration
 
 You can change Java system properties and JVM options by modifying
-`RDECK_JVM` property in `/etc/rundeck/profile` (which is persisted).
+`RDECK_JVM_SETTINGS` environment variable, which defaults to:
+
+```
+-Xmx1024m -Xms256m -XX:MaxMetaspaceSize=256m -server
+```
+
+Sample:
+
+```
+docker run -d --name=rundeck -p 4440:4440 \
+	-v /srv/rundeck/etc:/etc/rundeck \
+	-v /srv/rundeck/data:/var/lib/rundeck/data \
+	-v /srv/rundeck/logs:/var/lib/rundeck/logs \
+	-v /srv/rundeck/rundeck:/var/rundeck \
+	-v /srv/rundeck/ssh:/var/lib/rundeck/.ssh \
+	-e RDECK_JVM_SETTINGS="-Xms1024m -Xmx1024" \
+	jacekkow/rundeck
+```

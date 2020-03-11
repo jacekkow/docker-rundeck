@@ -1,4 +1,4 @@
-FROM openjdk:8-jre-slim
+FROM debian
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV RDECK_JVM_SETTINGS "-Xmx1024m -Xms256m -XX:MaxMetaspaceSize=256m -server"

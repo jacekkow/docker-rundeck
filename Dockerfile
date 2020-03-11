@@ -8,12 +8,13 @@ EXPOSE 4440
 ADD *-gpg.key /root/
 RUN apt-get -y update \
 	&& apt-get -y upgrade \
-	&& apt-get -y install openssh-client wget gnupg \
+	&& apt-get -y install openssh-client wget gnupg software-properties-common \
 	&& echo "deb http://dl.bintray.com/rundeck/rundeck-deb /" \
 		> /etc/apt/sources.list.d/rundeck.list \
+	&& add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ \
 	&& cat /root/*-gpg.key | apt-key add - \
 	&& apt-get -y update \
-	&& apt-get -y install rundeck \
+	&& apt-get -y install adoptopenjdk-8-hotspot rundeck \
 	&& apt-get -y clean \
 	&& rm -Rf /var/lib/apt/lists/*
 

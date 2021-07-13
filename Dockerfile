@@ -9,7 +9,7 @@ ADD *-gpg.key /root/
 RUN apt-get -y update \
 	&& apt-get -y upgrade \
 	&& apt-get -y install openssh-client wget gnupg software-properties-common \
-	&& echo "deb http://dl.bintray.com/rundeck/rundeck-deb /" \
+	&& echo "deb https://packagecloud.io/pagerduty/rundeck/any/ any main" \
 		> /etc/apt/sources.list.d/rundeck.list \
 	&& add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/ \
 	&& cat /root/*-gpg.key | apt-key add - \

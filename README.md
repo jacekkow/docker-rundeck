@@ -1,3 +1,12 @@
+# THIS PROJECT IS ABANDONED
+# NO NEW RELEASES WILL BE AVAILABLE
+
+Please switch to official Docker images from Rundeck team:
+https://hub.docker.com/r/rundeck/rundeck/
+https://github.com/rundeck/rundeck/tree/main/docker/official
+
+
+
 # Rundeck
 
 This is a Docker image of Rundeck (http://rundeck.org)
